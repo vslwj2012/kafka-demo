@@ -54,20 +54,20 @@ public class CronTimer {
         System.out.println("定时消费成功:" + record.topic() + "-" + record.partition() + "-" + record.value());
     }
 
-    //定时启动监听器
-    @Scheduled(cron = "0 22 10 * * ?")
-    public void startListener(){
-        if (!kafkaListenerEndpointRegistry.getListenerContainer("timingConsumer").isRunning()){
+    //定时启动监听器 定时在十点三十五启动
+    @Scheduled(cron = "0 40 10 * * ?")
+    public void startListener() {
+        if (!kafkaListenerEndpointRegistry.getListenerContainer("timingConsumer").isRunning()) {
             System.out.println("启动监听器...");
             kafkaListenerEndpointRegistry.getListenerContainer("timingConsumer").start();
         }
         System.out.println(kafkaListenerEndpointRegistry.getListenerContainer("timingConsumer").isRunning());
     }
 
-    //定时停止监听器
-    @Scheduled(cron = "0 24 10 * * ?")
-    public void shutDownListener(){
-        if (kafkaListenerEndpointRegistry.getListenerContainer("timingConsumer").isRunning());{
+    //定时停止监听器 定时在十点三十六关闭
+    @Scheduled(cron = "0 41 10 * * ?")
+    public void shutDownListener() {
+        if (kafkaListenerEndpointRegistry.getListenerContainer("timingConsumer").isRunning()) {
             System.out.println("关闭监听器...");
             kafkaListenerEndpointRegistry.getListenerContainer("timingConsumer").pause();
         }
