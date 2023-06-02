@@ -12,6 +12,7 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Scanner;
 
 @Component
 public class KafkaConsumer {
@@ -19,7 +20,7 @@ public class KafkaConsumer {
     @Autowired
     private ConsumerFactory consumerFactory;
 
-    @KafkaListener(id = "consumer1", topics = {"topic1", "test_topic", "topic8"}, groupId = "test-consumer-group")
+    @KafkaListener(id = "consumer1", topics = "topic9", groupId = "test-consumer-group")
     public void onMessage(ConsumerRecord<?, ?> record) {
         System.out.println("简单消费:" + record.topic() + "-"
                 + record.partition() + "-" + record.value());
@@ -35,14 +36,15 @@ public class KafkaConsumer {
      * <p>
      * ④ topicPartitions：可配置更加详细的监听信息，可指定topic、parition、offset监听。
      */
-//    @KafkaListener(id = "consumer2",groupId = "test-consumer-group",
-//    topicPartitions = {
-//            @TopicPartition(topic = "topic1",partitions = {"0"}),
-//            @TopicPartition(topic = "test_topic",partitions = "0")
-//    })
-//    public void onMessage2(ConsumerRecord<?,?> record){
-//        System.out.println("topic:"+record.topic()+"|partition:"+record.partition()+"|offset:"+record.offset()+"|value:"+record.value());
+//    @KafkaListener(id = "consumer2", groupId = "test-consumer-group",
+//            topicPartitions = {
+//                    @TopicPartition(topic = "topic1", partitions = {"0"}),
+//                    @TopicPartition(topic = "test_topic", partitions = "0")
+//            })
+//    public void onMessage2(ConsumerRecord<?, ?> record) {
+//        System.out.println("topic:" + record.topic() + "|partition:" + record.partition() + "|offset:" + record.offset() + "|value:" + record.value());
 //    }
+
     @KafkaListener(id = "consumer3", groupId = "test_consumer_group", topics = "topic4")
     public void onMessage3(List<ConsumerRecord<?, ?>> records) {
         System.out.println("批量消费一次,records.size()=" + records.size());

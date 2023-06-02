@@ -11,7 +11,7 @@ import org.springframework.messaging.Message;
 @Configuration
 public class KafkaInitialConfiguration {
 
-    // 创建一个名为test_topic的Topic并设置分区数为8，分区副本数为2
+    // 创建一个名为test_topic的Topic并设置分区数为8，分区副本数为1
     @Bean
     public NewTopic initialTopic() {
         return new NewTopic("test_topic", 8, (short) 1);
